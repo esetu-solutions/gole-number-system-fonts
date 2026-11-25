@@ -1,0 +1,35 @@
+{
+  "name": "@esetu-solutions/gole-number-system-fonts",
+  "version": "1.0.0",
+  "description": "Gole base-100 numeral font: one glyph for each digit pair 00-99. Free for non-commercial use only.",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": "eSetu Solutions Pvt Ltd (https://www.esetu.in/)",
+  "contributors": [
+    "Revelly Ravi"
+  ],
+  "homepage": "https://github.com/esetu-solutions/gole-number-system-fonts#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esetu-solutions/gole-number-system-fonts.git",
+    "directory": "dist"
+  },
+  "bugs": {
+    "url": "https://github.com/esetu-solutions/gole-number-system-fonts/issues"
+  },
+  "keywords": [
+    "gole",
+    "font",
+    "webfont",
+    "numerals",
+    "base-100",
+    "esetu"
+  ],
+  "style": "fonts/Ligature/GoleStandard.css",
+  "jsdelivr": "fonts/Ligature/GoleStandard.css",
+  "unpkg": "fonts/Ligature/GoleStandard.css",
+  "files": [
+    "fonts",
+    "LICENSE.md",
+    "README.md"
+  ]
+}

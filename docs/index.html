@@ -1,0 +1,647 @@
+<!doctype html>
+<!-- Copyright (c) 2026 eSetu Solutions Pvt Ltd (https://www.esetu.in/). All Rights Reserved. Gole is a trademark of eSetu. Licence: https://esetu.in/gole-number-system/licence -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gole vs Decimal</title>
+<meta name="description" content="Compare decimal and Gole numbers side by side: symbols, width, ink, paper and computing, measured live in your browser.">
+<style>
+  @font-face {
+    font-family: "GoleStandard";
+    src: url("../fonts/Ligature/GoleStandard.woff2") format("woff2"),
+         url("../fonts/Ligature/GoleStandard.woff") format("woff"),
+         url("../fonts/Ligature/GoleStandard.ttf") format("truetype");
+    font-display: block; /* avoid flashing empty boxes while the font loads */
+  }
+
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b66;
+    --line: #e7e6e1;
+    --accent: #1f7a5a;      /* text in the accent colour */
+    --accent-soft: #e3f1eb;
+    --mark: #00875a;        /* chart marks: Gole / saved */
+    --mark-base: #a8a79f;   /* chart marks: decimal / baseline */
+    --ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --dec: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121211; --surface: #1b1b19; --text: #ecebe6; --muted: #9a9992; --line: #2c2c29;
+      --accent: #5cc49b; --accent-soft: #1d3029; --mark: #22a070; --mark-base: #6a6964;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121211; --surface: #1b1b19; --text: #ecebe6; --muted: #9a9992; --line: #2c2c29;
+    --accent: #5cc49b; --accent-soft: #1d3029; --mark: #22a070; --mark-base: #6a6964;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 var(--ui);
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 56px 16px 72px; }
+
+  .eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  h1 { font-size: clamp(32px, 6vw, 44px); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 650; }
+  .lede { color: var(--muted); margin: 0 0 40px; max-width: 56ch; }
+  h2 { font-size: 22px; font-weight: 650; letter-spacing: -.01em; margin: 72px 0 6px; }
+  h2 + .sub { color: var(--muted); margin: 0 0 20px; max-width: 60ch; }
+  h3 { font-size: 15px; font-weight: 600; margin: 32px 0 12px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+
+  /* Input */
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  .field label, .knob label { font-size: 13px; color: var(--muted); }
+  input[type="text"], input[type="number"] {
+    font: 500 20px/1.3 var(--dec);
+    font-variant-numeric: tabular-nums;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    width: 100%;
+  }
+  input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: -8px 0 24px; }
+  .chips button {
+    font: 13px var(--ui); color: var(--muted);
+    background: transparent; border: 1px solid var(--line); border-radius: 999px;
+    padding: 4px 10px; cursor: pointer;
+  }
+  .chips button:hover { color: var(--text); border-color: var(--muted); }
+
+  /* Side-by-side rows */
+  .compare { padding: 8px 20px; }
+  .row { padding: 16px 0; }
+  .row + .row { border-top: 1px solid var(--line); }
+  .row-head { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .num { font-size: clamp(30px, 7vw, 48px); line-height: 1.25; overflow-wrap: anywhere; min-height: 1.25em; }
+  .num.dec { font-family: var(--dec); font-variant-numeric: tabular-nums; }
+  .num.gole, .gole { font-family: "GoleStandard", var(--dec); white-space: nowrap; }
+  .num.gole { white-space: normal; }
+  .bar { height: 4px; background: var(--line); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: var(--mark-base); border-radius: 2px; transition: width .25s ease; }
+  .row.gole-row .bar span { background: var(--mark); }
+
+  /* Stat tiles */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  .stats.five { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+  .stat { padding: 16px; }
+  .stat .k { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .stat .k svg { width: 16px; height: 16px; flex: none; stroke: var(--muted); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .stat .v { font-size: 30px; font-weight: 650; letter-spacing: -.02em; color: var(--accent); margin: 2px 0; font-variant-numeric: tabular-nums; }
+  .stat .v.neutral { color: var(--text); }
+  .stat .d { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  @media (max-width: 560px) {
+    .stats { gap: 8px; }
+    .stat { padding: 12px; }
+    .stat .v { font-size: 22px; }
+    .stat .d { font-size: 11px; }
+    .stats.five .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+
+  /* Examples table */
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+  th { font-weight: 500; color: var(--muted); font-size: 12px; }
+  td.r, th.r { text-align: right; }
+  td .gole { font-size: 22px; line-height: 1; }
+  td .save { color: var(--accent); font-weight: 600; }
+  tfoot td { font-weight: 600; border-top: 1px solid var(--line); border-bottom: 0; }
+  /* On phones keep the comparison itself: Decimal, Gole, Width, Ink. */
+  @media (max-width: 560px) {
+    table { font-size: 13px; }
+    th, td { padding: 10px 8px; }
+    td:nth-child(2) { white-space: normal; word-break: break-all; }
+    th:nth-child(1), td:nth-child(1), th:nth-child(4), td:nth-child(4) { display: none; }
+    td .gole { font-size: 18px; }
+  }
+
+  /* Scenario controls */
+  .knobs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+  .knob { display: flex; flex-direction: column; gap: 6px; }
+  .knob input[type="number"] { font-size: 17px; padding: 10px 12px; }
+  .knob .range-row { display: flex; align-items: center; gap: 12px; }
+  .knob input[type="range"] { flex: 1; accent-color: var(--mark); }
+  .knob output { font: 600 17px var(--ui); font-variant-numeric: tabular-nums; min-width: 3.2em; text-align: right; }
+  @media (max-width: 560px) { .knobs { grid-template-columns: 1fr; } }
+
+  /* Waffle: 100 pages */
+  .waffle-wrap { display: grid; grid-template-columns: minmax(0, 240px) 1fr; gap: 24px; align-items: center; padding: 20px; margin-top: 12px; }
+  .waffle { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+  .waffle i {
+    aspect-ratio: 3 / 4; border-radius: 2px; background: var(--mark-base);
+  }
+  .waffle i.saved { background: var(--mark); }
+  .legend { display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .legend i { width: 10px; height: 13px; border-radius: 2px; display: inline-block; background: var(--mark-base); }
+  .legend i.saved { background: var(--mark); }
+  .headline { font-size: 40px; font-weight: 650; letter-spacing: -.02em; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .headline-sub { color: var(--muted); font-size: 14px; margin: 4px 0 16px; }
+  @media (max-width: 560px) { .waffle-wrap { grid-template-columns: 1fr; } .waffle { max-width: 260px; } }
+
+  /* Index chart: Gole as % of decimal */
+  .ichart { padding: 20px; }
+  .irow { display: grid; grid-template-columns: 150px 1fr 56px; gap: 12px; align-items: center; padding: 7px 0; }
+  .irow .lbl { font-size: 14px; }
+  .irow .lbl small { display: block; color: var(--muted); font-size: 12px; }
+  .irow .val { font-size: 14px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+  .irow .val.save { color: var(--accent); }
+  .track { position: relative; height: 14px; }
+  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--mark); border-radius: 0 4px 4px 0; transition: width .25s ease; }
+  .track .fill.cost { background: var(--mark-base); }
+  .ref { position: absolute; top: -4px; bottom: -4px; border-left: 1.5px dashed var(--text); opacity: .55; }
+  .iaxis { display: grid; grid-template-columns: 150px 1fr 56px; gap: 12px; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .iaxis .ticks { position: relative; height: 16px; }
+  .iaxis .ticks span { position: absolute; transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+  @media (max-width: 560px) {
+    .irow, .iaxis { grid-template-columns: 96px 1fr 48px; gap: 8px; }
+    .irow .lbl small { display: none; }
+  }
+
+  .points { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .points .card { padding: 16px; font-size: 14px; }
+  .points b { display: block; margin-bottom: 4px; font-size: 14px; }
+  .points p { margin: 0; color: var(--muted); }
+  @media (max-width: 560px) { .points { grid-template-columns: 1fr; } }
+
+  .note { font-size: 13px; color: var(--muted); margin-top: 12px; max-width: 64ch; }
+  .note code, .points code { font-size: 12px; }
+
+  details { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 16px; }
+  details + details { margin-top: 0; }
+  details[open] { padding-bottom: 8px; }
+  summary { cursor: pointer; font-weight: 600; font-size: 15px; }
+  pre {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; overflow-x: auto; font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .assume { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-top: 12px; }
+  .assume .knob input { font-size: 15px; padding: 8px 10px; }
+  .assume .knob small { color: var(--muted); font-size: 12px; }
+  @media (max-width: 560px) { .assume { grid-template-columns: 1fr; } }
+
+  /* Tooltip */
+  #tip {
+    position: fixed; z-index: 10; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--text); color: var(--bg); font-size: 12px; line-height: 1.4;
+    padding: 6px 9px; border-radius: 6px; max-width: 240px;
+  }
+  #tip.on { opacity: 1; }
+
+  sup.cite { font-size: 10px; line-height: 0; margin-left: 1px; }
+  sup.cite a { color: var(--muted); text-decoration: none; }
+  sup.cite a:hover { color: var(--accent); }
+  .refs { font-size: 13px; color: var(--muted); padding-left: 20px; margin: 12px 0 0; }
+  .refs li { margin-bottom: 8px; padding-left: 4px; }
+  .refs li:target { color: var(--text); }
+  .refs a { color: inherit; overflow-wrap: anywhere; }
+  .refs b { color: var(--text); font-weight: 500; }
+
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: inherit; }
+  footer nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 16px; }
+  .copyright { display: flex; align-items: center; gap: 10px; }
+  .copyright img { width: 32px; height: 32px; flex: none; border-radius: 8px; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .copyright img { background: #f3f1f7; padding: 3px; }
+  }
+  :root[data-theme="dark"] .copyright img { background: #f3f1f7; padding: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Gole Number System</p>
+  <h1>Same number. Half the symbols.</h1>
+  <p class="lede">Gole writes every pair of decimal digits as one symbol. Type a number to see how much shorter it gets, and what that saves on screen, on paper and in computing. Everything below is measured live in your browser.</p>
+
+  <div class="field">
+    <label for="n">Decimal number</label>
+    <input id="n" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1863486135148634.75">
+  </div>
+  <div class="chips" aria-label="Examples">
+    <button data-v="2026">Year</button>
+    <button data-v="1234567">1234567</button>
+    <button data-v="12.5">12.5</button>
+    <button data-v="3.14159265">π</button>
+    <button data-v="9876543210">10 digits</button>
+    <button data-v="1863486135148634156">19 digits</button>
+  </div>
+
+  <section class="card compare" aria-live="polite">
+    <div class="row">
+      <div class="row-head"><span>Decimal</span><span id="dec-meta"></span></div>
+      <div class="num dec" id="dec"></div>
+      <div class="bar"><span id="dec-bar"></span></div>
+    </div>
+    <div class="row gole-row">
+      <div class="row-head"><span>Gole</span><span id="gole-meta"></span></div>
+      <div class="num gole" id="gole"></div>
+      <div class="bar"><span id="gole-bar"></span></div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="card stat"><div class="k">Symbols</div><div class="v" id="s-sym">–</div><div class="d" id="s-sym-d"></div></div>
+    <div class="card stat"><div class="k">Width</div><div class="v" id="s-w">–</div><div class="d" id="s-w-d"></div></div>
+    <div class="card stat"><div class="k">Ink</div><div class="v" id="s-ink">–</div><div class="d" id="s-ink-d"></div></div>
+  </div>
+
+  <!-- Everyday numbers -->
+  <h2>Everyday numbers</h2>
+  <p class="sub">The same comparison for the kinds of numbers that fill invoices, tickets and dashboards.</p>
+  <div class="card table-wrap">
+    <table>
+      <thead>
+        <tr><th>Kind</th><th>Decimal</th><th>Gole</th><th class="r">Symbols</th><th class="r">Width</th><th class="r">Ink</th></tr>
+      </thead>
+      <tbody id="examples"></tbody>
+      <tfoot><tr id="totals"></tr></tfoot>
+    </table>
+  </div>
+
+  <!-- Paper and sustainability -->
+  <h2>Paper and sustainability</h2>
+  <p class="sub">Narrower numbers mean narrower columns, fewer wrapped lines and fewer pages. Set how much you print and how much of each page is numbers.</p>
+
+  <div class="card knobs">
+    <div class="knob">
+      <label for="pages">Number-heavy pages printed per year</label>
+      <input id="pages" type="number" min="0" step="1000" value="100000">
+    </div>
+    <div class="knob">
+      <label for="share">Share of each page taken up by numbers</label>
+      <div class="range-row">
+        <input id="share" type="range" min="5" max="80" step="5" value="30">
+        <output id="share-out" for="share">30%</output>
+      </div>
+    </div>
+  </div>
+
+  <div class="card waffle-wrap">
+    <div class="waffle" id="waffle" role="img"></div>
+    <div>
+      <div class="headline" id="p-head">–</div>
+      <div class="headline-sub" id="p-head-sub">of pages saved</div>
+      <div class="legend">
+        <span><i></i> Still printed, now set in Gole</span>
+        <span><i class="saved"></i> Pages no longer needed</span>
+      </div>
+      <p class="note" id="p-formula"></p>
+    </div>
+  </div>
+
+  <div class="stats five">
+    <div class="card stat">
+      <div class="k"><svg viewBox="0 0 16 16"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3"/></svg>Sheets</div>
+      <div class="v" id="i-sheets">–</div><div class="d">saved per year</div>
+    </div>
+    <div class="card stat">
+      <div class="k"><svg viewBox="0 0 16 16"><path d="M8 1.5l4.5 6h-2.5l3 4h-10l3-4h-2.5z"/><path d="M8 11.5v3"/></svg>Trees<sup class="cite"><a href="#ref-1">1</a></sup></div>
+      <div class="v" id="i-trees">–</div><div class="d" id="i-kg"></div>
+    </div>
+    <div class="card stat">
+      <div class="k"><svg viewBox="0 0 16 16"><path d="M8 1.5c2.5 3.5 4.5 6 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2.5 2-5 4.5-8.5z"/></svg>Water<sup class="cite"><a href="#ref-2">2</a></sup></div>
+      <div class="v" id="i-water">–</div><div class="d">litres saved</div>
+    </div>
+    <div class="card stat">
+      <div class="k"><svg viewBox="0 0 16 16"><path d="M4.5 12.5a3.5 3.5 0 0 1-.3-7 4.5 4.5 0 0 1 8.6 1.5 2.8 2.8 0 0 1-.3 5.5z"/></svg>CO₂e<sup class="cite"><a href="#ref-3">3</a></sup></div>
+      <div class="v" id="i-co2">–</div><div class="d">kg avoided</div>
+    </div>
+    <div class="card stat">
+      <div class="k"><svg viewBox="0 0 16 16"><rect x="2.5" y="5.5" width="11" height="6" rx="1"/><path d="M5 5.5v-3h6v3M5 11.5v2.5h6v-2.5"/></svg>Toner<sup class="cite"><a href="#ref-5">5</a></sup></div>
+      <div class="v" id="i-toner">–</div><div class="d">less on number text</div>
+    </div>
+  </div>
+  <p class="note">
+    Uses the measured width and ink savings from the everyday numbers above. Pages saved assumes page count shrinks in proportion to the width the numbers take, which fits tables, statements and ledgers better than prose.
+    Conversion factors are published averages with wide ranges; see <i>Assumptions</i> and <i>Sources</i> below, and adjust them to your own paper and supplier.
+  </p>
+
+  <!-- Computing -->
+  <h2>Computing</h2>
+  <p class="sub">Gole changes how many glyphs a computer lays out and draws. For your number above, Gole needs this much of what decimal needs:</p>
+
+  <div class="card ichart" id="ichart" role="img" aria-label="Gole as a percentage of decimal for glyphs, width, pixels and bytes stored by each font build">
+    <div id="irows"></div>
+    <div class="iaxis" aria-hidden="true"><span></span><div class="ticks" id="iticks"></div><span></span></div>
+  </div>
+  <p class="note">The dashed line is decimal at 100%. Shorter bars mean less work.</p>
+
+  <div class="points">
+    <div class="card"><b>Half the glyphs to shape and draw</b><p>Text layout, font lookup and rasterising scale with the number of glyphs. Every million 10-digit numbers on screen is 5 million glyphs instead of 10 million.</p></div>
+    <div class="card"><b>Fewer lit pixels<sup class="cite"><a href="#ref-6">6</a></sup></b><p>On OLED screens each pixel makes its own light, so display power depends on how many pixels are lit and how bright they are. In dark mode, light Gole numbers light fewer pixels; the <i>Pixels drawn</i> bar shows how many. The saving applies to the number text only, not the whole screen.</p></div>
+    <div class="card"><b>More data per screen</b><p>Narrower columns fit more values per row on dashboards, phones and smartwatches, which means less scrolling and fewer pages to render.</p></div>
+    <div class="card"><b>Storage depends on the font build<sup class="cite"><a href="#ref-7">7</a></sup></b><p>With the Ligature build, the text stays ordinary digits, so it costs the same bytes as decimal plus at most one padding <code>0</code> per number. The PUA build stores each pair as one Private Use Area character<sup class="cite"><a href="#ref-8">8</a></sup>, 3 bytes in UTF-8 against 2 for the two digits it replaces. With the PUA build, store and compute with the decimal value and convert to Gole only for display.</p></div>
+  </div>
+
+  <!-- Method -->
+  <details>
+    <summary>Assumptions</summary>
+    <p class="note">Change any value and the paper figures update.</p>
+    <div class="assume">
+      <div class="knob"><label for="a-g">Grams per A4 sheet</label><input id="a-g" type="number" min="1" step="0.1" value="5"><small>A4 is 210 × 297 mm: 80 g/m² × 0.0624 m² ≈ 5 g</small></div>
+      <div class="knob"><label for="a-tree">Sheets per tree</label><input id="a-tree" type="number" min="1" step="100" value="7500"><small>24 trees per US ton (907 kg) of virgin office paper ≈ 37.8 kg per tree<sup class="cite"><a href="#ref-1">1</a></sup></small></div>
+      <div class="knob"><label for="a-water">Litres of water per sheet</label><input id="a-water" type="number" min="0" step="0.5" value="10"><small>Global average for an 80 g/m² A4 sheet; varies with the wood source<sup class="cite"><a href="#ref-2">2</a></sup></small></div>
+      <div class="knob"><label for="a-co2">kg CO₂e per kg of paper</label><input id="a-co2" type="number" min="0" step="0.1" value="1.3"><small>UK Government factor for primary paper and board ≈ 1.28<sup class="cite"><a href="#ref-3">3</a></sup>; mill declarations go as low as 0.09<sup class="cite"><a href="#ref-4">4</a></sup>, full life cycle above 3</small></div>
+    </div>
+    <p class="note">
+      <b>Measurements.</b> Symbols counts digits against Gole glyphs; separators such as <code>.</code>, <code>/</code> and <code>:</code> stay the same and are not counted.
+      Width and ink come from drawing both versions on a canvas at the same font size, decimal in your system's sans-serif font, so they vary a little by device.
+      Ink is pixel coverage, a stand-in for printed ink (toner yield is rated by page coverage<sup class="cite"><a href="#ref-5">5</a></sup>) and for lit pixels on screen.
+      Bytes are counted with the browser's own UTF-8 encoder<sup class="cite"><a href="#ref-7">7</a></sup>.
+    </p>
+  </details>
+
+  <details>
+    <summary>How the conversion works</summary>
+    <p class="note">Pad the whole part on the left and the fraction on the right to an even length, and display the digits as they are. The Ligature build of GoleStandard, used on this page, draws each pair of digits as one Gole symbol. With the PUA build, turn each pair <i>n</i> into the character U+E441 + <i>n</i> instead.</p>
+<pre><code>// Ligature build: the padded digits are the Gole text.
+const toGole = (v) => {
+  const [int, ...rest] = String(v).replace(/[^\d.]/g, "").split(".");
+  const frac = rest.join(""), i = int || "0";
+  return (i.length % 2 ? "0" + i : i) +
+    (rest.length ? "." + (frac.length % 2 ? frac + "0" : frac) : "");
+};
+
+// PUA build: one character per pair, U+E441 + n.
+const toGolePUA = (v) =>
+  toGole(v).replace(/\d\d/g, (p) => String.fromCharCode(0xE441 + Number(p)));
+
+toGole(1234567); // "01234567" shows [01][23][45][67]
+toGole(12.5);    // "12.50"    shows [12].[50]</code></pre>
+  </details>
+
+  <details id="sources" open>
+    <summary>Sources</summary>
+    <p class="note">Symbols, width, pixels and bytes are measured on this page. The figures below are the published factors behind the paper, toner and computing notes.</p>
+    <ol class="refs">
+      <li id="ref-1"><b>Trees.</b> Conservatree, “So how many trees would make a ton of paper?”: about 24 trees per US ton of uncoated virgin office paper. <a href="http://conservatree.org/learn/EnviroIssues/TreeStats.shtml">conservatree.org</a></li>
+      <li id="ref-2"><b>Water.</b> A. Y. Hoekstra, Water Footprint Network, global average water footprints: 10 L of water per 80 g/m² A4 sheet. <a href="https://ayhoekstra.nl/pubs/Hoekstra-2010-TheEnvironmentalist-01March-Issue93.pdf">Hoekstra (2010), The Environmentalist</a></li>
+      <li id="ref-3"><b>CO₂e.</b> UK Department for Energy Security and Net Zero, Government greenhouse gas conversion factors for company reporting, material use: mixed paper and board, primary material production, about 1,283 kg CO₂e per tonne. <a href="https://www.gov.uk/government/collections/government-conversion-factors-for-company-reporting">gov.uk</a></li>
+      <li id="ref-4"><b>CO₂e, low end.</b> Holmen, paper climate impact: about 90 kg CO₂e per tonne, cradle to gate, for an 80 g/m² paper from a mill with low-carbon energy. <a href="https://holmen.com/en/paper/sustainability/sustainability-stories/paper-climate-impact">holmen.com</a></li>
+      <li id="ref-5"><b>Toner.</b> ISO/IEC 19752:2025, method for determining toner cartridge yield, which rates yield against a test page of fixed coverage. <a href="https://www.iso.org/standard/88924.html">iso.org</a></li>
+      <li id="ref-6"><b>OLED power.</b> M. Dong, Y.-S. K. Choi and L. Zhong, “Power modeling of graphical user interfaces on OLED displays”, Design Automation Conference 2009. OLED power depends on the colour and intensity of each pixel; the relationship is not linear. <a href="https://solar.cs.ucl.ac.uk/appoptimization.github.io/publications/DCZ2009/">Summary (UCL)</a></li>
+      <li id="ref-7"><b>UTF-8.</b> RFC 3629: characters U+0800 to U+FFFF, which include the PUA build's U+E441–U+E4A4, take three bytes. <a href="https://www.rfc-editor.org/rfc/rfc3629">rfc-editor.org</a></li>
+      <li id="ref-8"><b>Private Use Area.</b> The Unicode Standard, code chart U+E000–U+F8FF. <a href="https://www.unicode.org/charts/PDF/UE000.pdf">unicode.org</a></li>
+    </ol>
+  </details>
+
+  <footer>
+    <nav>
+      <a href="https://esetu.in/gole-number-system/what-is-gole-number-system">What is Gole?</a>
+      <a href="https://esetu.in/gole-knowledge-base/how-to-write-gole-numbers">How to write Gole numbers</a>
+      <a href="https://esetu.in/experience-in-gole/decimal-to-gole-conversion">Decimal to Gole converter</a>
+      <a href="../README.md">README</a>
+    </nav>
+    <div class="copyright">
+      <a href="https://www.esetu.in/"><img src="images/esetu-logo.webp" alt="eSetu" width="32" height="32"></a>
+      <span>© 2026 eSetu Solutions Pvt Ltd. Gole is a trademark of eSetu.
+      Free for non-commercial use. <a href="https://esetu.in/gole-number-system/licence">Licence</a>.</span>
+    </div>
+  </footer>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+  const PUA_BASE = 0xE441;   // PUA build: pair n is U+E441 + n (used here only to count its bytes)
+
+  // Ligature build: pad the whole part on the left and the fraction on the right
+  // ("123" → "0123", "12.5" → "12.50"). The font draws each pair of digits as one glyph.
+  const toGole = (v) => {
+    const [int, ...rest] = String(v).replace(/[^\d.]/g, "").split(".");
+    const frac = rest.join(""), i = int || "0";
+    return (i.length % 2 ? "0" + i : i) + (rest.length ? "." + (frac.length % 2 ? frac + "0" : frac) : "");
+  };
+
+  // Mixed text: pad each run of digits separately, keep separators as they are.
+  const toGoleText = (s) => s.replace(/\d+(?:\.\d+)?/g, toGole);
+  const toPUA = (s) => s.replace(/\d\d/g, (p) => String.fromCharCode(PUA_BASE + Number(p)));
+
+  const digitCount = (s) => (s.match(/\d/g) || []).length;
+  const goleCount = (s) => (s.match(/\d\d/g) || []).length;   // one glyph per padded pair
+  const utf8 = (s) => new TextEncoder().encode(s).length;
+
+  // Width and ink, measured on a canvas at a fixed size.
+  const SIZE = 64;
+  const DEC_STACK = getComputedStyle(document.documentElement).getPropertyValue("--dec").trim();
+  const DEC_FONT = `${SIZE}px ${DEC_STACK}`;
+  const GOLE_FONT = `${SIZE}px GoleStandard, ${DEC_STACK}`;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
+  function measure(text, font) {
+    ctx.font = font;
+    const width = ctx.measureText(text).width;
+    canvas.width = Math.max(1, Math.ceil(width) + 8);
+    canvas.height = Math.ceil(SIZE * 1.5);
+    ctx.font = font;
+    ctx.fillStyle = "#000";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(text, 4, Math.round(SIZE * 1.1));
+    const a = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let ink = 0;
+    for (let i = 3; i < a.length; i += 4) ink += a[i];
+    return { width, ink: ink / 255 };
+  }
+
+  const saved = (before, after) => (before > 0 ? 1 - after / before : 0);
+  const pct = (x) => {
+    const p = Math.round(x * 100);
+    return p >= 0 ? `−${p}%` : `+${-p}%`;
+  };
+  const fmt = (n, digits = 0) => n.toLocaleString(undefined, { maximumFractionDigits: digits });
+
+  function compare(dec) {
+    const gole = toGoleText(dec);
+    const d = measure(dec, DEC_FONT);
+    const g = measure(gole, GOLE_FONT);
+    return {
+      dec, gole,
+      digits: digitCount(dec), glyphs: goleCount(gole),
+      dw: d.width, gw: g.width, di: d.ink, gi: g.ink,
+      d8: utf8(dec), lig8: utf8(gole), pua8: utf8(toPUA(gole)),
+    };
+  }
+
+  const $ = (id) => document.getElementById(id);
+
+  // ---- Live comparison --------------------------------------------------
+  const input = $("n");
+
+  function clean(v) {
+    // Keep digits and the first decimal point; commas and spaces are ignored.
+    const s = v.replace(/[^\d.]/g, "");
+    const i = s.indexOf(".");
+    return i < 0 ? s : s.slice(0, i + 1) + s.slice(i + 1).replace(/\./g, "");
+  }
+
+  function render() {
+    const dec = clean(input.value);
+    if (!/\d/.test(dec)) {
+      ["dec", "gole", "dec-meta", "gole-meta", "s-sym-d", "s-w-d", "s-ink-d"].forEach((id) => ($(id).textContent = ""));
+      ["s-sym", "s-w", "s-ink"].forEach((id) => ($(id).textContent = "–"));
+      $("dec-bar").style.width = $("gole-bar").style.width = "0";
+      $("irows").innerHTML = "";
+      return;
+    }
+    const r = compare(dec);
+    $("dec").textContent = r.dec;
+    $("gole").textContent = r.gole;
+    $("gole").setAttribute("aria-label", r.dec);
+    $("dec-meta").textContent = `${r.digits} digits`;
+    $("gole-meta").textContent = `${r.glyphs} glyphs`;
+    $("dec-bar").style.width = "100%";
+    $("gole-bar").style.width = `${Math.min(100, (r.gw / r.dw) * 100)}%`;
+
+    $("s-sym").textContent = pct(saved(r.digits, r.glyphs));
+    $("s-sym-d").textContent = `${r.digits} → ${r.glyphs} · ${r.digits - r.glyphs} fewer`;
+    $("s-w").textContent = pct(saved(r.dw, r.gw));
+    $("s-w-d").textContent = `${Math.round(r.dw)} → ${Math.round(r.gw)} px at ${SIZE}px`;
+    $("s-ink").textContent = pct(saved(r.di, r.gi));
+    $("s-ink").classList.toggle("neutral", r.gi > r.di);
+    $("s-ink-d").textContent = `${fmt(r.di)} → ${fmt(r.gi)} px²`;
+
+    renderComputing(r);
+  }
+
+  // ---- Computing: Gole as % of decimal ------------------------------------
+  const AXIS_MAX = 160;
+
+  function renderComputing(r) {
+    const rows = [
+      ["Glyphs", "to lay out and draw", r.digits, r.glyphs, "glyphs"],
+      ["Width", "screen space", r.dw, r.gw, "px"],
+      ["Pixels drawn", "ink, lit pixels", r.di, r.gi, "px²"],
+      ["Bytes, Ligature", "UTF-8, text stays digits", r.d8, r.lig8, "bytes"],
+      ["Bytes, PUA", "UTF-8, 3 bytes per pair", r.d8, r.pua8, "bytes"],
+    ];
+    $("irows").innerHTML = rows.map(([name, hint, d, g, unit]) => {
+      const p = d > 0 ? (g / d) * 100 : 0;
+      const cost = p >= 100;   // 100% is no saving, so draw it neutral
+      const tip = `${name}: decimal ${fmt(d)} ${unit}, Gole ${fmt(g)} ${unit} (${Math.round(p)}% of decimal)`;
+      return `
+        <div class="irow" data-tip="${tip}">
+          <div class="lbl">${name}<small>${hint}</small></div>
+          <div class="track">
+            <div class="fill${cost ? " cost" : ""}" style="width:${(Math.min(p, AXIS_MAX) / AXIS_MAX) * 100}%"></div>
+            <div class="ref" style="left:${(100 / AXIS_MAX) * 100}%"></div>
+          </div>
+          <div class="val${cost ? "" : " save"}">${Math.round(p)}%</div>
+        </div>`;
+    }).join("");
+  }
+  $("iticks").innerHTML = [0, 50, 100, 150].map((t) => `<span style="left:${(t / AXIS_MAX) * 100}%">${t}%</span>`).join("");
+
+  // ---- Everyday numbers ---------------------------------------------------
+  const EXAMPLES = [
+    ["Year", "2026"],
+    ["Date", "24/11/2026"],
+    ["Time", "12:05:09"],
+    ["Price", "124999.50"],
+    ["Percentage", "99.5"],
+    ["Invoice no.", "2026001847"],
+    ["Tracking no.", "1863486135148634156"],
+    ["π", "3.14159265"],
+  ];
+  let everyday = { width: 0.5, ink: 0.5 };
+
+  function renderExamples() {
+    const rows = EXAMPLES.map(([kind, v]) => ({ kind, ...compare(v) }));
+    $("examples").innerHTML = rows.map((r) => `
+      <tr>
+        <td>${r.kind}</td>
+        <td>${r.dec}</td>
+        <td><span class="gole" aria-label="${r.dec}">${r.gole}</span></td>
+        <td class="r">${r.digits} → ${r.glyphs}</td>
+        <td class="r save">${pct(saved(r.dw, r.gw))}</td>
+        <td class="r save">${pct(saved(r.di, r.gi))}</td>
+      </tr>`).join("");
+
+    const sum = (k) => rows.reduce((t, r) => t + r[k], 0);
+    everyday = { width: saved(sum("dw"), sum("gw")), ink: saved(sum("di"), sum("gi")) };
+    $("totals").innerHTML = `
+      <td></td><td>All of the above</td><td></td>
+      <td class="r">${sum("digits")} → ${sum("glyphs")}</td>
+      <td class="r save">${pct(everyday.width)}</td>
+      <td class="r save">${pct(everyday.ink)}</td>`;
+  }
+
+  // ---- Paper and sustainability -------------------------------------------
+  const waffle = $("waffle");
+  waffle.innerHTML = "<i></i>".repeat(100);
+  const num = (id) => Math.max(0, Number($(id).value) || 0);
+
+  function renderPaper() {
+    const pages = num("pages");
+    const share = num("share") / 100;
+    $("share-out").textContent = `${Math.round(share * 100)}%`;
+
+    const fraction = share * everyday.width;        // share of pages no longer needed
+    const sheets = pages * fraction;
+    const kg = (sheets * num("a-g")) / 1000;
+    const per = num("a-tree");
+
+    $("p-head").textContent = `${(fraction * 100).toFixed(1)}%`;
+    $("p-head-sub").textContent = `of pages saved · ${fmt(pages - sheets)} instead of ${fmt(pages)}`;
+    $("p-formula").textContent =
+      `${Math.round(share * 100)}% of the page is numbers × ${Math.round(everyday.width * 100)}% narrower in Gole = ${(fraction * 100).toFixed(1)}% fewer pages.`;
+
+    const savedCells = Math.round(fraction * 100);
+    [...waffle.children].forEach((c, i) => {
+      const isSaved = i >= 100 - savedCells;
+      c.classList.toggle("saved", isSaved);
+      c.dataset.tip = isSaved ? `1% of pages: no longer printed (${fmt(pages / 100)} sheets)` : `1% of pages: still printed (${fmt(pages / 100)} sheets)`;
+    });
+    waffle.setAttribute("aria-label", `${savedCells} of every 100 pages saved`);
+
+    $("i-sheets").textContent = fmt(sheets);
+    $("i-trees").textContent = per ? fmt(sheets / per, 1) : "–";
+    $("i-kg").textContent = `${fmt(kg)} kg of paper`;
+    $("i-water").textContent = fmt(sheets * num("a-water"));
+    $("i-co2").textContent = fmt(kg * num("a-co2"));
+    $("i-toner").textContent = pct(everyday.ink);
+  }
+
+  // ---- Tooltip ------------------------------------------------------------
+  const tip = $("tip");
+  function showTip(e) {
+    const t = e.target.closest("[data-tip]");
+    if (!t) { tip.classList.remove("on"); return; }
+    tip.textContent = t.dataset.tip;
+    const x = Math.min(e.clientX + 12, window.innerWidth - tip.offsetWidth - 8);
+    tip.style.left = `${Math.max(8, x)}px`;
+    tip.style.top = `${e.clientY + 14}px`;
+    tip.classList.add("on");
+  }
+  document.addEventListener("pointermove", showTip);
+  document.addEventListener("pointerdown", showTip);
+  document.addEventListener("scroll", () => tip.classList.remove("on"), { passive: true });
+
+  // ---- Wiring -------------------------------------------------------------
+  input.addEventListener("input", render);
+  document.querySelectorAll(".chips button").forEach((b) =>
+    b.addEventListener("click", () => { input.value = b.dataset.v; render(); input.focus(); }));
+  ["pages", "share", "a-g", "a-tree", "a-water", "a-co2"].forEach((id) => $(id).addEventListener("input", renderPaper));
+
+  // Measurements need the real font, so wait for it before the first render.
+  document.fonts.load(`${SIZE}px GoleStandard`, "00").then(() => {
+    renderExamples();
+    render();
+    renderPaper();
+  });
+</script>
+</body>
+</html>

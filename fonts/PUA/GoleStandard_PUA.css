@@ -1,0 +1,21 @@
+/* GoleStandard
+ * Version: 1.0.0
+ * Characters: with PUA (U+E441–U+E4A4)
+ * Copyright (c) 2026 eSetu Solutions Pvt Ltd (https://www.esetu.in/). All Rights Reserved.
+ * Licence: https://esetu.in/gole-number-system/licence
+
+ * Glyph for main M + modifier N: U+E441 + M*10 + N (e.g. main 3 + modifier 5 = "\e464").
+ * Digits 0-9 on their own show the main symbols. See glyphs.json.
+ */
+@font-face {
+  font-family: "GoleStandard";
+  src: url("GoleStandard_PUA.woff2") format("woff2"),
+       url("GoleStandard_PUA.woff") format("woff"),
+       url("GoleStandard_PUA.ttf") format("truetype");
+  font-display: block;
+}
+
+.golestandard {
+  --gole-font-version: "1.0.0";
+  font-family: "GoleStandard";
+}
