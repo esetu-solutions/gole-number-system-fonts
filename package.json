@@ -10,8 +10,7 @@
   "homepage": "https://github.com/esetu-solutions/gole-number-system-fonts#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esetu-solutions/gole-number-system-fonts.git",
-    "directory": "dist"
+    "url": "git+https://github.com/esetu-solutions/gole-number-system-fonts.git"
   },
   "bugs": {
     "url": "https://github.com/esetu-solutions/gole-number-system-fonts/issues"

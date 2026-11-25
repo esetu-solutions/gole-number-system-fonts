@@ -15,7 +15,7 @@ This is a source-available license. It is not an open-source license. The summar
 ## 1. Definitions
 
 - **"eSetu"** means eSetu Solutions Private Limited (https://www.esetu.in/), the owner of the Materials.
-- **"Materials"** means everything published in the repository https://github.com/esetu-solutions/gole-number-fonts, in whole or in part, and any copy of it. This includes the font files (TTF, WOFF, WOFF2), the web font kit, the glyph images (SVG, PNG, JPEG), the Gole to decimal index (HTML, PDF, PNG, SVG), the metadata and glyph data (`metadata/font.json`, `webfont/glyphs.json`), and the documentation.
+- **"Materials"** means everything published in the repository https://github.com/esetu-solutions/gole-number-system-fonts, in whole or in part, and any copy of it.
 - **"You"** means the person or organization using the Materials.
 - **"Non-Commercial Use"** means use that is not primarily intended for, or directed towards, commercial advantage or monetary compensation. It includes:
   - personal use;

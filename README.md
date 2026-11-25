@@ -229,7 +229,7 @@ Ligature build:
   font-display: block;   /* wait for the font rather than flash plain digits */
 }
 
-.gole {
+.golestandard {
   /* Keep a normal font after GoleStandard: ".", ":", "/" and letters fall through to it. */
   font-family: "GoleStandard", system-ui, sans-serif;
   white-space: nowrap;   /* keeps a number from wrapping mid-value */
@@ -326,7 +326,7 @@ export function Gole({ value, decimals, as: Tag = "span", ...rest }) {
 // <Gole value={12747.2} decimals={2} /> → "012747.20" shows [01][27][47].[20]
 ```
 
-Import the `@font-face` CSS once at your app root. With CSS Modules or Tailwind, add a `.gole` class (or a `font-gole` utility) with the same rules as in [HTML/CSS](#htmlcss).
+Import the `@font-face` CSS once at your app root. With CSS Modules or Tailwind, add a `.golestandard` class (or a `font-gole` utility) with the same rules as in [HTML/CSS](#htmlcss).
 
 > **Packages.** The npm package for these fonts is `@esetu-solutions/gole-number-system-fonts`. eSetu is also building `@gole-number-system/gole-core`, `@gole-number-system/react-gole`, `@gole-number-system/react-gole-charts` and a matching PyPI `gole-core`. **None of these four is published yet.** Use the code in this README instead.
 
@@ -462,7 +462,7 @@ A shipping label with a long tracking number, shown in decimal and in Gole on tw
 <title>Gole · Logistics label</title>
 <style>
   @font-face { font-family: "GoleStandard"; src: url("../fonts/Ligature/GoleStandard.woff2") format("woff2"), url("../fonts/Ligature/GoleStandard.ttf") format("truetype"); font-display: block; }
-  .gole { font-family: "GoleStandard", system-ui, sans-serif; white-space: nowrap; }
+  .golestandard { font-family: "GoleStandard", system-ui, sans-serif; white-space: nowrap; }
 
   * { box-sizing: border-box; }
   body { margin: 0; padding: 28px 16px; background: #f4f1ea; color: #1d1d1b; font: 16px/1.5 system-ui, sans-serif; }
@@ -493,7 +493,7 @@ A shipping label with a long tracking number, shown in decimal and in Gole on tw
   .pairs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .pair { display: grid; justify-items: center; min-width: 64px; padding: 6px 8px; background: #fff;
           border: 1px solid #e2ddd0; border-radius: 10px; }
-  .pair .gole { font-size: 30px; line-height: 1.1; color: #0f766e; }
+  .pair .golestandard { font-size: 30px; line-height: 1.1; color: #0f766e; }
   .pair small { font: 12px ui-monospace, Menlo, monospace; color: #6b675e; }
   .pair.pad { border-color: #c2410c; }
   .pair.pad small::before { content: "pad "; color: #c2410c; }
