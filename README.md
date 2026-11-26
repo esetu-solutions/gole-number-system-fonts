@@ -1,6 +1,5 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/logo-lockup-dark.png" />
     <img src="docs/images/golenumber-github-banner.png" alt="Gole Number System" width="530" />
   </picture>
 </p>
