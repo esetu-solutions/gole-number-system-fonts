@@ -7,7 +7,7 @@
  * Glyph for main M + modifier N: type the two digits "MN" (e.g. "35"); a ligature draws them
  * as one glyph, and the text stays plain digits. Pad an odd count of digits with a 0 on the
  * left (whole part) or right (after a decimal point). Letter-spacing turns ligatures off.
- * Digits 0-9 on their own show the main symbols. See glyphs.json.
+ * Digits 0-9 on their own show the main symbols.
  */
 @font-face {
   font-family: "GoleStandard";

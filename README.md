@@ -619,11 +619,20 @@ A shipping label with a long tracking number, shown in decimal and in Gole on tw
 
 Copyright © 2026 eSetu Solutions Pvt Ltd. All rights reserved. **Gole** is a trademark of eSetu.
 
-Licence text embedded in the font:
+The fonts are licensed under the [eSetu Gole Number Fonts Non-Commercial License](LICENSE.md). The short notice embedded in the font files reads:
 
 > Free for personal, educational, and non-commercial development or visualization use only. Commercial use, redistribution, or production deployment requires a separate commercial license from eSetu.
 
-The Gole Number System, its glyph designs and this font file are the intellectual property of eSetu Solutions Pvt Ltd. This repository is **not** open source. Showing the font in this repository does not grant a licence to embed or redistribute it in a product.
+The full licence text is in [LICENSE.md](LICENSE.md) and governs where this summary or the embedded notice is shorter. Under it, for non-commercial use, you may:
+
+- download, install and use the fonts (§2.1);
+- create Output (documents, images, presentations, papers and similar works), **embed the fonts in that Output**, and share or publish it (§2.2);
+- give unmodified copies to others free of charge, with the licence and all notices (§2.3);
+- modify the fonts for your own study (§2.4).
+
+Commercial use, including embedding the fonts in Output, software, apps, devices or services offered commercially, commercial redistribution and production deployment, needs a separate commercial licence from eSetu (§3, §6).
+
+The Gole Number System, its glyph designs and these font files are the intellectual property of eSetu Solutions Pvt Ltd. This repository is **not** open source.
 
 For commercial licensing, see [esetu.in/gole-number-system/licence](https://esetu.in/gole-number-system/licence) and the [trademark policy](https://www.esetu.in/trademark-policy).
 

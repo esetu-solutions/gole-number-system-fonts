@@ -5,7 +5,7 @@
  * Licence: https://esetu.in/gole-number-system/licence
 
  * Glyph for main M + modifier N: U+E441 + M*10 + N (e.g. main 3 + modifier 5 = "\e464").
- * Digits 0-9 on their own show the main symbols. See glyphs.json.
+ * Digits 0-9 on their own show the main symbols.
  */
 @font-face {
   font-family: "GoleStandard";

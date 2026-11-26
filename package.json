@@ -26,9 +26,25 @@
   "style": "fonts/Ligature/GoleStandard.css",
   "jsdelivr": "fonts/Ligature/GoleStandard.css",
   "unpkg": "fonts/Ligature/GoleStandard.css",
+  "exports": {
+    ".": {
+      "style": "./fonts/Ligature/GoleStandard.css",
+      "default": "./fonts/Ligature/GoleStandard.css"
+    },
+    "./ligature.css": "./fonts/Ligature/GoleStandard.css",
+    "./pua.css": "./fonts/PUA/GoleStandard_PUA.css",
+    "./fonts/*": "./fonts/*",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "fonts",
     "LICENSE.md",
     "README.md"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
