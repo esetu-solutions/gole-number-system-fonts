@@ -1,6 +1,28 @@
-# Gole Number System - Fonts
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/logo-lockup-dark.png" />
+    <img src="docs/images/golenumber-github-banner.png" alt="Gole Number System" width="330" />
+  </picture>
+</p>
 
-**Gole Number System is a base-100 number system.** Decimal has ten symbols, 0 to 9, and each one stands for one digit. Gole has a hundred symbols, one for every value from 0 to 99, so each Gole symbol stands for a pair of decimal digits.
+<p align="center"><b>Gole Number System is a base-100 number system. </b><br/>
+Decimal has ten symbols, 0 to 9, and each one stands for one digit. Gole has a hundred symbols, one for every value from 0 to 99, so each Gole symbol stands for a pair of decimal digits.</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@esetu-solutions/gole-number-system-fonts"><img src="https://img.shields.io/badge/npm-v1.0.0-orange" alt="npm version" /></a>
+  <a href="https://esetu.in/gole-number-system/licence"><img src="https://img.shields.io/badge/licence-eSetu-orange" alt="npm version" /></a>
+  <a href="https://esetu-solutions.github.io/gole-number-system-fonts/"><img src="https://img.shields.io/badge/docs-online-2ea44f" alt="Docs" /></a>
+  
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quickstart</a> ·
+  <a href="https://esetu-solutions.github.io/gole-number-system-fonts/">Docs</a> ·
+  <a href="#quick-demo---logistics-label">Demo</a> ·
+  <a href="#implementation-guide">Implementation guide</a>
+</p>
+
+# Gole Number System - Fonts
 
 A number written in Gole needs **half as many symbols** as the same number in decimal. For the background and purpose of the system, see [What is the Gole number system?](https://esetu.in/gole-number-system/what-is-gole-number-system)
 
