@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/logo-lockup-dark.png" />
-    <img src="docs/images/golenumber-github-banner.png" alt="Gole Number System" width="330" />
+    <img src="docs/images/golenumber-github-banner.png" alt="Gole Number System" width="530" />
   </picture>
 </p>
 
@@ -71,14 +71,14 @@ To learn how to say Gole numbers aloud, see [How to pronounce Gole numbers](http
 2. Read the digits two at a time from the left.
 3. Write each pair as the Gole symbol for its value.
 
-| Decimal | Pairs | Gole symbols count|
-|---|---|---|
-| `7` | `[07]` | 1 |
-| `35` | `[35]` | 1 |
-| `123` | `[01][23]` | 2 |
-| `2026` | `[20][26]` | 2 |
-| `1,00,000` | `[10][00][00]` | 3 |
-| `1863486135148634156` | `[01][86][34][86][13][51][48][63][41][56]` | 10 |
+| Decimal | Pairs | Gole symbol | Gole symbols count |
+|---|---|---|---|
+| `7` | `[07]` | <img src="docs/images/gole-symbols.svg#s07" alt="07" height="18"> | 1 |
+| `35` | `[35]` | <img src="docs/images/gole-symbols.svg#s35" alt="35" height="18"> | 1 |
+| `123` | `[01][23]` | <img src="docs/images/gole-symbols.svg#s01" alt="01" height="18"><img src="docs/images/gole-symbols.svg#s23" alt="23" height="18"> | 2 |
+| `2026` | `[20][26]` | <img src="docs/images/gole-symbols.svg#s20" alt="20" height="18"><img src="docs/images/gole-symbols.svg#s26" alt="26" height="18"> | 2 |
+| `1,00,000` | `[10][00][00]` | <img src="docs/images/gole-symbols.svg#s10" alt="10" height="18"><img src="docs/images/gole-symbols.svg#s00" alt="00" height="18"><img src="docs/images/gole-symbols.svg#s00" alt="00" height="18"> | 3 |
+| `1863486135148634156` | `[01][86][34][86][13][51][48][63][41][56]` | <img src="docs/images/gole-symbols.svg#s01" alt="01" height="18"><img src="docs/images/gole-symbols.svg#s86" alt="86" height="18"><img src="docs/images/gole-symbols.svg#s34" alt="34" height="18"><img src="docs/images/gole-symbols.svg#s86" alt="86" height="18"><img src="docs/images/gole-symbols.svg#s13" alt="13" height="18"><img src="docs/images/gole-symbols.svg#s51" alt="51" height="18"><img src="docs/images/gole-symbols.svg#s48" alt="48" height="18"><img src="docs/images/gole-symbols.svg#s63" alt="63" height="18"><img src="docs/images/gole-symbols.svg#s41" alt="41" height="18"><img src="docs/images/gole-symbols.svg#s56" alt="56" height="18"> | 10 |
 
 A number with *n* digits takes **⌈*n* / 2⌉** Gole symbols. The leading `0` doesn't change the value, just as `07` is still seven.
 
@@ -86,11 +86,11 @@ A number with *n* digits takes **⌈*n* / 2⌉** Gole symbols. The leading `0` d
 
 The whole part is padded on the left, as above. The fractional part is padded on the **right**, so its value stays the same: `.5` is `.50`.
 
-| Decimal | Pairs |
-|---|---|
-| `144.00` | `[01][44].[00]` |
-| `12.5` | `[12].[50]` |
-| `0.375` | `[00].[37][50]` |
+| Decimal | Pairs | Gole symbol |
+|---|---|---|
+| `144.00` | `[01][44].[00]` | <img src="docs/images/gole-symbols.svg#s01" alt="01" height="18"><img src="docs/images/gole-symbols.svg#s44" alt="44" height="18">.<img src="docs/images/gole-symbols.svg#s00" alt="00" height="18"> |
+| `12.5` | `[12].[50]` | <img src="docs/images/gole-symbols.svg#s12" alt="12" height="18">.<img src="docs/images/gole-symbols.svg#s50" alt="50" height="18"> |
+| `0.375` | `[00].[37][50]` | <img src="docs/images/gole-symbols.svg#s00" alt="00" height="18">.<img src="docs/images/gole-symbols.svg#s37" alt="37" height="18"><img src="docs/images/gole-symbols.svg#s50" alt="50" height="18"> |
 
 Gole only replaces digits. The decimal point, separators, signs and units stay as they are, and each run of digits is written separately:
 
@@ -173,14 +173,14 @@ Both builds draw the same 100 Gole symbols, 00–99, plus the ten main shapes fo
 
 **Pad the digits and display them as they are.** The font draws each pair of digits as one Gole symbol.
 
-| Decimal | Text to display | Shows as |
-|---|---|---|
-| `7` | `07` | `[07]` |
-| `35` | `35` | `[35]` |
-| `123` | `0123` | `[01][23]` |
-| `2026` | `2026` | `[20][26]` |
-| `12.5` | `12.50` | `[12].[50]` |
-| `20/11/2026` | `20/11/2026` | `[20]/[11]/[20][26]` |
+| Decimal | Text to display | Shows as | Gole symbol |
+|---|---|---|---|
+| `7` | `07` | `[07]` | <img src="docs/images/gole-symbols.svg#s07" alt="07" height="18"> |
+| `35` | `35` | `[35]` | <img src="docs/images/gole-symbols.svg#s35" alt="35" height="18"> |
+| `123` | `0123` | `[01][23]` | <img src="docs/images/gole-symbols.svg#s01" alt="01" height="18"><img src="docs/images/gole-symbols.svg#s23" alt="23" height="18"> |
+| `2026` | `2026` | `[20][26]` | <img src="docs/images/gole-symbols.svg#s20" alt="20" height="18"><img src="docs/images/gole-symbols.svg#s26" alt="26" height="18"> |
+| `12.5` | `12.50` | `[12].[50]` | <img src="docs/images/gole-symbols.svg#s12" alt="12" height="18">.<img src="docs/images/gole-symbols.svg#s50" alt="50" height="18"> |
+| `20/11/2026` | `20/11/2026` | `[20]/[11]/[20][26]` | <img src="docs/images/gole-symbols.svg#s20" alt="20" height="18">/<img src="docs/images/gole-symbols.svg#s11" alt="11" height="18">/<img src="docs/images/gole-symbols.svg#s20" alt="20" height="18"><img src="docs/images/gole-symbols.svg#s26" alt="26" height="18"> |
 
 The ligatures are a required font feature, so CSS `letter-spacing`, `font-variant-ligatures: none` and `font-feature-settings: "liga" 0` don't turn them off. (The comment in `GoleStandard.css` says letter-spacing does; tested in Chrome, it doesn't.)
 
@@ -190,14 +190,14 @@ Unicode has no Gole symbols yet, so this build stores them in Unicode's Private 
 
 *n* is the ordinary decimal value of the pair, and the code point is hexadecimal. Pair `35` is U+E441 + 35 = **U+E464**. U+E441 + 0x35 would be U+E476, which is pair 53.
 
-| Decimal | Pairs | Characters |
-|---|---|---|
-| `7` | `[07]` | U+E448 |
-| `35` | `[35]` | U+E464 |
-| `99` | `[99]` | U+E4A4 |
-| `123` | `[01][23]` | U+E442 U+E458 |
-| `2026` | `[20][26]` | U+E455 U+E45B |
-| `12.5` | `[12].[50]` | U+E44D `.` U+E473 |
+| Decimal | Pairs | Characters | Gole symbol |
+|---|---|---|---|
+| `7` | `[07]` | U+E448 | <img src="docs/images/gole-symbols.svg#s07" alt="07" height="18"> |
+| `35` | `[35]` | U+E464 | <img src="docs/images/gole-symbols.svg#s35" alt="35" height="18"> |
+| `99` | `[99]` | U+E4A4 | <img src="docs/images/gole-symbols.svg#s99" alt="99" height="18"> |
+| `123` | `[01][23]` | U+E442 U+E458 | <img src="docs/images/gole-symbols.svg#s01" alt="01" height="18"><img src="docs/images/gole-symbols.svg#s23" alt="23" height="18"> |
+| `2026` | `[20][26]` | U+E455 U+E45B | <img src="docs/images/gole-symbols.svg#s20" alt="20" height="18"><img src="docs/images/gole-symbols.svg#s26" alt="26" height="18"> |
+| `12.5` | `[12].[50]` | U+E44D `.` U+E473 | <img src="docs/images/gole-symbols.svg#s12" alt="12" height="18">.<img src="docs/images/gole-symbols.svg#s50" alt="50" height="18"> |
 
 The 100 symbols use U+E441 to U+E4A4.
 
