@@ -1,8 +1,8 @@
 /* GoleStandard
- * Version: 1.0.0
+ * Version: 1.0.2
  * Characters: without PUA (ligatures)
  * Copyright (c) 2026 eSetu Solutions Pvt Ltd (https://www.esetu.in/). All Rights Reserved.
- * Licence: https://esetu.in/gole-number-system/licence
+ * Licence: https://www.esetu.in/gole-number-system/licence
 
  * Glyph for main M + modifier N: type the two digits "MN" (e.g. "35"); a ligature draws them
  * as one glyph, and the text stays plain digits. Pad an odd count of digits with a 0 on the
@@ -18,7 +18,7 @@
 }
 
 .golestandard {
-  --gole-font-version: "1.0.0";
+  --gole-font-version: "1.0.2";
   font-family: "GoleStandard";
   font-variant-ligatures: common-ligatures;
   letter-spacing: normal;

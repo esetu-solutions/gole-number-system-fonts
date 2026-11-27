@@ -3,13 +3,12 @@
     <img src="docs/images/golenumber-github-banner.png" alt="Gole Number System" width="530" />
   </picture>
 </p>
-
 <p align="center"><b>Gole Number System is a base-100 number system. </b><br/>
 Decimal has ten symbols, 0 to 9, and each one stands for one digit. Gole has a hundred symbols, one for every value from 0 to 99, so each Gole symbol stands for a pair of decimal digits.</p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@esetu-solutions/gole-number-system-fonts"><img src="https://img.shields.io/badge/npm-v1.0.0-orange" alt="npm version" /></a>
-  <a href="https://esetu.in/gole-number-system/licence"><img src="https://img.shields.io/badge/licence-eSetu-orange" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@esetu-solutions/gole-number-system-fonts"><img src="https://img.shields.io/github/v/release/esetu-solutions/gole-number-system-fonts?include_prereleases&style=flat-square&label=release" alt="Release" /></a>
+  <a href="https://www.esetu.in/gole-number-system/licence"><img src="https://img.shields.io/badge/licence-Gole Number System Community Licence v1.0-orange" alt="eSetu" /></a>
   <a href="https://esetu-solutions.github.io/gole-number-system-fonts/"><img src="https://img.shields.io/badge/docs-online-2ea44f" alt="Docs" /></a>
   
 </p>
@@ -21,7 +20,7 @@ Decimal has ten symbols, 0 to 9, and each one stands for one digit. Gole has a h
   <a href="#implementation-guide">Implementation guide</a>
 </p>
 
-# Gole Number System - Fonts
+## Gole Number System - Fonts
 
 A number written in Gole needs **half as many symbols** as the same number in decimal. For the background and purpose of the system, see [What is the Gole number system?](https://esetu.in/gole-number-system/what-is-gole-number-system)
 
@@ -638,22 +637,13 @@ A shipping label with a long tracking number, shown in decimal and in Gole on tw
 
 ## Licence
 
-Copyright © 2026 eSetu Solutions Pvt Ltd. All rights reserved. **Gole** is a trademark of eSetu.
+Copyright © 2026 eSetu Solutions Pvt Ltd. **Gole Number System™** and **eSetu™** are trademarks of eSetu.
 
-The fonts are licensed under the [eSetu Gole Number Fonts Non-Commercial License](LICENSE.md). The short notice embedded in the font files reads:
+The fonts, the Gole symbol artwork and the documentation in this repository are licensed under the [Gole Number System Community Licence v1.0](LICENSE.md). Free to use with attribution; conditions apply. The full terms are in [LICENSE.md](LICENSE.md) and at [esetu.in/gole-number-system/licence](https://www.esetu.in/gole-number-system/licence).
 
-> Free for personal, educational, and non-commercial development or visualization use only. Commercial use, redistribution, or production deployment requires a separate commercial license from eSetu.
+When you use or show Gole, credit it as `Gole Number System™ by eSetu Solutions Pvt. Ltd. – https://esetu.in`.
 
-The full licence text is in [LICENSE.md](LICENSE.md) and governs where this summary or the embedded notice is shorter. Under it, for non-commercial use, you may:
+**Open-source packages.** The code of [`@gole-number-system/gole-core`](https://github.com/gole-number-system/gole-core), [`react-gole`](https://github.com/gole-number-system/react-gole) and [`react-gole-charts`](https://github.com/gole-number-system/react-gole-charts) is open source under the MIT licence. Their MIT licence covers that code only: using them to show Gole numbers still uses these fonts and the Gole Number System, so the terms above apply, and patent rights come only from this licence (§1, §2.6).
 
-- download, install and use the fonts (§2.1);
-- create Output (documents, images, presentations, papers and similar works), **embed the fonts in that Output**, and share or publish it (§2.2);
-- give unmodified copies to others free of charge, with the licence and all notices (§2.3);
-- modify the fonts for your own study (§2.4).
-
-Commercial use, including embedding the fonts in Output, software, apps, devices or services offered commercially, commercial redistribution and production deployment, needs a separate commercial licence from eSetu (§3, §6).
-
-The Gole Number System, its glyph designs and these font files are the intellectual property of eSetu Solutions Pvt Ltd. This repository is **not** open source.
-
-For commercial licensing, see [esetu.in/gole-number-system/licence](https://esetu.in/gole-number-system/licence) and the [trademark policy](https://www.esetu.in/trademark-policy).
+This is not an open-source licence. For a commercial licence or any question about it, contact [legal@esetu.in](mailto:legal@esetu.in) or use the [contact form](https://www.esetu.in/contact-us). See also the [trademark policy](https://www.esetu.in/trademark-policy).
 
